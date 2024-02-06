@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: crm-app
+  name: crm-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crm-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: crm-app
+    spec:
+      containers:
+      - image: mysql:8
+        name: mysql
+        resources: {}
+status: {}
