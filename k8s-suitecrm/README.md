@@ -68,3 +68,9 @@ Access it using:
 ```
 http://<instance_ip>:8080
 ```
+
+9. Stop all deployment and services
+
+```
+minikube delete --all
+```
