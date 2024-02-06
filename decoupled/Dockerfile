@@ -1,5 +1,9 @@
 FROM php:7.4-fpm
 
+# Dockerfile used to build yalecthub/nginx-php:7.4 image
+# Author: Azeez Yahaya
+# Date: 6/2/2024
+
 # PHP_CPPFLAGS are used by the docker-php-ext-* scripts
 ENV PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
 ENV DEBIAN_FRONTEND=noninteractive
@@ -26,6 +30,10 @@ RUN { \
 
 COPY entrypoint.sh /etc/entrypoint.sh
 COPY nginx/nginx.conf /etc/nginx/sites-enabled/default
+
+COPY --chown=www-data:www-data public /srv/app
+
+WORKDIR /srv/app
 
 EXPOSE 80 443
 
