@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mysqldb
+  name: db-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysqldb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mysqldb
+    spec:
+      containers:
+      - image: mysql:8
+        name: mysqldb
+        env:
+          - name: MYSQL_DATABASE
+            value: db
+          - name: MYSQL_PASSWORD
+            value: password
+          - name: MYSQL_ROOT_PASSWORD
+            value: passwrd123
+          - name: MYSQL_USER
+            value: user
+        ports:
+          - containerPort: 3306
+            hostPort: 3306
+            protocol: TCP
+        volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: suitecrm-db
+        resources: {}
+      restartPolicy: Always
+      volumes:
+        - name: suitecrm-db
+          persistentVolumeClaim:
+            claimName: suitecrm-db
+status: {}
